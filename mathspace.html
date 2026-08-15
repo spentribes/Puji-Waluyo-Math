@@ -1,0 +1,1049 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MATHSPACE – Ruang Belajar Matematika SMP</title>
+<meta name="description" content="MathSpace: ruang belajar Matematika interaktif untuk siswa SMP Kelas VII, VIII, dan IX.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   TOKENS
+   ============================================================ */
+:root{
+  --paper:#F5F6FB;
+  --paper-card:#FFFFFF;
+  --ink:#181C36;
+  --ink-soft:#565B82;
+  --ink-faint:#8A8FB3;
+  --line:#E2E4F1;
+  --grid-line: rgba(59,91,252,.07);
+
+  --primary:#3B5BFC;
+  --primary-dark:#2739C4;
+  --primary-tint:#EAEDFF;
+
+  --mint:#0FAF9B;
+  --mint-tint:#E1F7F3;
+
+  --coral:#FF6B57;
+  --coral-tint:#FFE9E4;
+
+  --amber:#F0A020;
+  --amber-tint:#FFF3DE;
+
+  --violet:#8657E8;
+  --violet-tint:#F0E7FE;
+
+  --radius-lg:22px;
+  --radius-md:16px;
+  --radius-sm:10px;
+  --shadow-sm: 0 2px 10px rgba(24,28,54,.06);
+  --shadow-md: 0 12px 32px rgba(24,28,54,.10);
+  --shadow-lg: 0 24px 60px rgba(24,28,54,.16);
+
+  --font-display:'Space Grotesk', 'Segoe UI', sans-serif;
+  --font-body:'Inter', 'Segoe UI', sans-serif;
+  --font-mono:'Space Mono', 'Courier New', monospace;
+}
+
+*,*::before,*::after{ box-sizing:border-box; }
+html{ scroll-behavior:smooth; }
+@media (prefers-reduced-motion: reduce){
+  html{ scroll-behavior:auto; }
+  *,*::before,*::after{ animation-duration:.001ms !important; animation-iteration-count:1 !important; transition-duration:.001ms !important; scroll-behavior:auto !important; }
+}
+body{
+  margin:0;
+  font-family:var(--font-body);
+  color:var(--ink);
+  background:
+    linear-gradient(var(--grid-line) 1px, transparent 1px) 0 0/40px 40px,
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px) 0 0/40px 40px,
+    var(--paper);
+  -webkit-font-smoothing:antialiased;
+}
+img{ max-width:100%; display:block; }
+a{ color:inherit; text-decoration:none; }
+button{ font-family:inherit; cursor:pointer; }
+ul{ margin:0; padding:0; list-style:none; }
+h1,h2,h3,h4{ font-family:var(--font-display); margin:0; line-height:1.15; letter-spacing:-.01em; }
+p{ margin:0; }
+:focus-visible{ outline:3px solid var(--primary); outline-offset:3px; border-radius:4px; }
+
+.container{ max-width:1180px; margin:0 auto; padding:0 24px; }
+.eyebrow{
+  font-family:var(--font-mono); font-size:.72rem; letter-spacing:.14em; text-transform:uppercase;
+  color:var(--primary); font-weight:700; display:inline-flex; align-items:center; gap:8px;
+}
+.eyebrow::before{ content:''; width:18px; height:2px; background:var(--primary); display:inline-block; }
+.section-head{ max-width:640px; margin-bottom:44px; }
+.section-head h2{ font-size:clamp(1.7rem,3.4vw,2.5rem); margin-top:10px; }
+.section-head p{ color:var(--ink-soft); margin-top:12px; font-size:1.02rem; line-height:1.6; }
+section{ padding:88px 0; position:relative; }
+.section-alt{ background:var(--paper-card); border-top:1px solid var(--line); border-bottom:1px solid var(--line); }
+
+.btn{
+  display:inline-flex; align-items:center; gap:8px; justify-content:center;
+  padding:14px 26px; border-radius:100px; font-weight:700; font-size:.95rem;
+  border:2px solid transparent; transition:transform .15s ease, box-shadow .15s ease, background .15s ease;
+  white-space:nowrap;
+}
+.btn:active{ transform:scale(.97); }
+.btn-primary{ background:var(--primary); color:#fff; box-shadow:0 8px 20px rgba(59,91,252,.28); }
+.btn-primary:hover{ background:var(--primary-dark); box-shadow:0 10px 26px rgba(59,91,252,.36); transform:translateY(-2px); }
+.btn-ghost{ background:transparent; border-color:var(--ink); color:var(--ink); }
+.btn-ghost:hover{ background:var(--ink); color:#fff; transform:translateY(-2px); }
+.btn-light{ background:#fff; color:var(--primary); }
+.btn-light:hover{ transform:translateY(-2px); box-shadow:var(--shadow-md); }
+.btn-sm{ padding:10px 18px; font-size:.85rem; }
+.btn-block{ width:100%; }
+
+/* ============================================================
+   HEADER
+   ============================================================ */
+header{
+  position:sticky; top:0; z-index:100;
+  background:rgba(245,246,251,.86); backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line);
+}
+.nav-wrap{ display:flex; align-items:center; justify-content:space-between; padding:14px 24px; max-width:1180px; margin:0 auto; }
+.brand{ display:flex; align-items:center; gap:10px; font-family:var(--font-display); font-weight:700; font-size:1.25rem; }
+.brand-mark{ width:38px; height:38px; border-radius:11px; background:var(--ink); position:relative; flex:none; }
+.brand-mark svg{ position:absolute; inset:0; }
+nav.main-nav{ display:flex; align-items:center; gap:2px; }
+nav.main-nav a{
+  font-size:.9rem; font-weight:600; padding:10px 14px; border-radius:100px; color:var(--ink-soft);
+  transition:background .15s ease,color .15s ease;
+}
+nav.main-nav a:hover, nav.main-nav a.active{ background:var(--primary-tint); color:var(--primary); }
+.nav-actions{ display:flex; align-items:center; gap:10px; }
+.hamburger{ display:none; background:none; border:none; padding:8px; }
+.hamburger span{ display:block; width:24px; height:2.5px; background:var(--ink); margin:5px 0; border-radius:2px; transition:.2s; }
+
+@media (max-width: 940px){
+  nav.main-nav{
+    position:fixed; top:64px; left:0; right:0; height:calc(100vh - 64px); background:var(--paper); flex-direction:column; align-items:stretch;
+    padding:16px 20px; gap:4px; transform:translateY(-120%); transition:transform .25s ease; overflow-y:auto;
+    visibility:hidden; pointer-events:none;
+  }
+  nav.main-nav.open{ transform:translateY(0); visibility:visible; pointer-events:auto; }
+  nav.main-nav a{ padding:16px; font-size:1.05rem; border-bottom:1px solid var(--line); border-radius:0; }
+  .hamburger{ display:block; }
+  .nav-actions .btn-primary{ display:none; }
+}
+
+/* ============================================================
+   SEARCH BAR (in header)
+   ============================================================ */
+.search-box{ position:relative; }
+.search-box input{
+  width:220px; padding:10px 14px 10px 38px; border-radius:100px; border:1.5px solid var(--line);
+  background:#fff; font-size:.85rem; font-family:var(--font-body); color:var(--ink);
+  transition:width .2s ease, border-color .2s ease;
+}
+.search-box input:focus{ width:280px; border-color:var(--primary); }
+.search-box svg{ position:absolute; left:12px; top:50%; transform:translateY(-50%); width:16px; height:16px; color:var(--ink-faint); pointer-events:none; }
+#searchResults{
+  position:absolute; top:calc(100% + 8px); right:0; width:320px; max-height:360px; overflow-y:auto;
+  background:#fff; border-radius:14px; box-shadow:var(--shadow-lg); border:1px solid var(--line);
+  padding:8px; display:none; z-index:200;
+}
+#searchResults.show{ display:block; }
+#searchResults .sr-item{ display:block; padding:10px 12px; border-radius:10px; }
+#searchResults .sr-item:hover{ background:var(--primary-tint); }
+#searchResults .sr-cat{ font-family:var(--font-mono); font-size:.65rem; text-transform:uppercase; color:var(--primary); letter-spacing:.06em; }
+#searchResults .sr-empty{ padding:16px; color:var(--ink-soft); font-size:.88rem; text-align:center; }
+@media (max-width:940px){ .search-box input{ width:150px; } .search-box input:focus{ width:150px; } }
+@media (max-width:600px){ .search-box{ display:none; } }
+
+/* ============================================================
+   HERO
+   ============================================================ */
+.hero{ padding:70px 0 40px; overflow:hidden; position:relative; }
+.hero-grid{ display:grid; grid-template-columns:1.05fr .95fr; gap:40px; align-items:center; }
+.hero h1{ font-size:clamp(2.2rem,5vw,3.4rem); margin-top:16px; }
+.hero h1 .accent{ color:var(--primary); position:relative; white-space:nowrap; }
+.hero p.lead{ margin-top:18px; font-size:1.12rem; color:var(--ink-soft); line-height:1.65; max-width:540px; }
+.hero-actions{ display:flex; gap:14px; margin-top:30px; flex-wrap:wrap; }
+.hero-stats{ display:flex; gap:28px; margin-top:40px; flex-wrap:wrap; }
+.hero-stat b{ font-family:var(--font-mono); font-size:1.5rem; display:block; color:var(--primary); }
+.hero-stat span{ font-size:.82rem; color:var(--ink-soft); }
+
+.hero-visual{ position:relative; aspect-ratio:1/1; }
+.hero-visual svg{ width:100%; height:100%; }
+.float-sym{ position:absolute; font-family:var(--font-display); font-weight:700; color:var(--primary); opacity:.85; animation:floaty 6s ease-in-out infinite; user-select:none; }
+.float-sym.f2{ color:var(--coral); animation-delay:-1.5s; animation-duration:7s; }
+.float-sym.f3{ color:var(--mint); animation-delay:-3s; animation-duration:5.5s; }
+.float-sym.f4{ color:var(--amber); animation-delay:-2s; animation-duration:6.5s; }
+.float-sym.f5{ color:var(--violet); animation-delay:-4s; animation-duration:7.5s; }
+@keyframes floaty{ 0%,100%{ transform:translateY(0) rotate(0deg);} 50%{ transform:translateY(-18px) rotate(6deg);} }
+
+/* ============================================================
+   AXIS DIVIDER (signature motif — number-line connector between sections)
+   ============================================================ */
+.axis-divider{ display:flex; align-items:center; gap:14px; padding:0 24px; max-width:1180px; margin:0 auto; color:var(--ink-faint); }
+.axis-divider .line{ flex:1; height:1px; background:repeating-linear-gradient(90deg, var(--line) 0 6px, transparent 6px 12px); }
+.axis-divider span{ font-family:var(--font-mono); font-size:.72rem; letter-spacing:.08em; text-transform:uppercase; white-space:nowrap; }
+.axis-divider svg{ flex:none; }
+
+/* ============================================================
+   GRADE CARDS ("plotted along the difficulty curve")
+   ============================================================ */
+.grade-plot{ position:relative; }
+.grade-axis-label{ font-family:var(--font-mono); font-size:.72rem; color:var(--ink-faint); text-transform:uppercase; letter-spacing:.08em; display:flex; align-items:center; gap:8px; margin-bottom:26px; }
+.grade-axis-label svg{ flex:none; }
+.grade-cards{ display:grid; grid-template-columns:repeat(3,1fr); gap:26px; align-items:end; }
+.grade-card{
+  background:var(--paper-card); border:1px solid var(--line); border-radius:var(--radius-lg);
+  padding:30px 26px; box-shadow:var(--shadow-sm); position:relative; transition:transform .2s ease, box-shadow .2s ease;
+  display:flex; flex-direction:column; gap:16px;
+}
+.grade-card:hover{ transform:translateY(-8px); box-shadow:var(--shadow-lg); }
+.grade-card:nth-child(1){ margin-top:64px; }
+.grade-card:nth-child(2){ margin-top:32px; }
+.grade-card:nth-child(3){ margin-top:0; }
+.grade-tag{
+  font-family:var(--font-mono); font-size:.72rem; font-weight:700; letter-spacing:.06em;
+  padding:6px 12px; border-radius:100px; width:fit-content;
+}
+.grade-card.c-mint .grade-tag{ background:var(--mint-tint); color:var(--mint); }
+.grade-card.c-coral .grade-tag{ background:var(--coral-tint); color:var(--coral); }
+.grade-card.c-amber .grade-tag{ background:var(--amber-tint); color:var(--amber); }
+.grade-card h3{ font-size:1.5rem; }
+.grade-card p.desc{ color:var(--ink-soft); font-size:.95rem; line-height:1.55; }
+.grade-topics{ display:flex; flex-wrap:wrap; gap:8px; }
+.grade-topics span{ font-size:.78rem; background:var(--paper); border:1px solid var(--line); padding:5px 11px; border-radius:100px; color:var(--ink-soft); }
+.grade-card .btn{ margin-top:auto; }
+.grade-card.c-mint .btn-primary{ background:var(--mint); box-shadow:0 8px 20px rgba(15,175,155,.28); }
+.grade-card.c-mint .btn-primary:hover{ background:#0c8f7f; }
+.grade-card.c-coral .btn-primary{ background:var(--coral); box-shadow:0 8px 20px rgba(255,107,87,.28); }
+.grade-card.c-coral .btn-primary:hover{ background:#e5503c; }
+.grade-card.c-amber .btn-primary{ background:var(--amber); box-shadow:0 8px 20px rgba(240,160,32,.28); }
+.grade-card.c-amber .btn-primary:hover{ background:#d68c0f; }
+@media (max-width:860px){
+  .grade-cards{ grid-template-columns:1fr; }
+  .grade-card:nth-child(1),.grade-card:nth-child(2),.grade-card:nth-child(3){ margin-top:0; }
+}
+
+/* ============================================================
+   MEDIA GRID
+   ============================================================ */
+.media-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(210px,1fr)); gap:20px; }
+.media-card{
+  background:var(--paper-card); border:1px solid var(--line); border-radius:var(--radius-md);
+  padding:26px 22px; display:flex; flex-direction:column; gap:14px; transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+}
+.media-card:hover{ transform:translateY(-6px); box-shadow:var(--shadow-md); border-color:transparent; }
+.media-icon{ width:52px; height:52px; border-radius:14px; display:flex; align-items:center; justify-content:center; font-size:1.5rem; }
+.media-card h4{ font-size:1.08rem; }
+.media-card p{ color:var(--ink-soft); font-size:.88rem; line-height:1.5; flex:1; }
+.media-card a.open{ font-weight:700; font-size:.85rem; color:var(--primary); display:inline-flex; align-items:center; gap:6px; }
+.media-card a.open svg{ transition:transform .15s ease; }
+.media-card:hover a.open svg{ transform:translateX(3px); }
+
+/* ============================================================
+   MATH IN LIFE
+   ============================================================ */
+.life-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:18px; }
+.life-card{
+  position:relative; border-radius:var(--radius-md); overflow:hidden; aspect-ratio:4/3;
+  display:flex; align-items:flex-end; padding:18px; color:#fff;
+}
+.life-card::after{ content:''; position:absolute; inset:0; background:linear-gradient(180deg, rgba(24,28,54,0) 30%, rgba(24,28,54,.78) 100%); z-index:0; }
+.life-card .life-emoji{ position:absolute; top:16px; right:16px; font-size:1.7rem; z-index:2; filter:drop-shadow(0 2px 4px rgba(0,0,0,.25)); }
+.life-card span.txt{ position:relative; z-index:1; font-weight:700; font-family:var(--font-display); font-size:1.05rem; }
+@media (max-width:760px){ .life-grid{ grid-template-columns:repeat(2,1fr); } }
+@media (max-width:480px){ .life-grid{ grid-template-columns:1fr; } }
+
+/* ============================================================
+   DIALOG & DISCUSSION
+   ============================================================ */
+.dialog-wrap{ display:grid; grid-template-columns:1fr 1fr; gap:44px; align-items:start; }
+.prompt-card{
+  background:var(--violet-tint); border-radius:var(--radius-md); padding:20px 22px; margin-bottom:14px;
+  font-style:italic; color:#4a3580; font-size:.98rem; line-height:1.55; position:relative; cursor:pointer;
+  border:1px solid transparent; transition:border-color .15s ease, transform .15s ease;
+}
+.prompt-card:hover{ border-color:var(--violet); transform:translateX(4px); }
+.prompt-card::before{ content:'“'; font-family:var(--font-display); font-size:2.4rem; color:var(--violet); position:absolute; top:-6px; left:14px; opacity:.35; }
+.dialog-box{ background:var(--paper-card); border:1px solid var(--line); border-radius:var(--radius-lg); padding:26px; box-shadow:var(--shadow-sm); }
+.dialog-box textarea{
+  width:100%; min-height:100px; border:1.5px solid var(--line); border-radius:var(--radius-sm); padding:14px;
+  font-family:var(--font-body); font-size:.95rem; resize:vertical; color:var(--ink);
+}
+.dialog-box textarea:focus{ border-color:var(--violet); outline:none; }
+.dialog-actions{ display:flex; gap:12px; margin-top:14px; }
+.dialog-box .btn-primary{ background:var(--violet); box-shadow:0 8px 20px rgba(134,87,232,.28); }
+.dialog-box .btn-primary:hover{ background:#6f3fd6; }
+#dialogFeed{ margin-top:22px; display:flex; flex-direction:column; gap:10px; max-height:220px; overflow-y:auto; }
+.feed-item{ background:var(--paper); border-radius:12px; padding:12px 14px; font-size:.88rem; border-left:3px solid var(--violet); }
+.feed-item .fi-meta{ font-family:var(--font-mono); font-size:.68rem; color:var(--ink-faint); margin-top:4px; }
+@media (max-width:860px){ .dialog-wrap{ grid-template-columns:1fr; } }
+
+/* ============================================================
+   INFO PENTING
+   ============================================================ */
+.info-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:18px; }
+.info-card{
+  background:var(--paper-card); border:1px solid var(--line); border-radius:var(--radius-md); padding:20px;
+  display:flex; gap:14px; align-items:flex-start; transition:box-shadow .15s ease;
+}
+.info-card:hover{ box-shadow:var(--shadow-sm); }
+.info-dot{ width:10px; height:10px; border-radius:50%; margin-top:6px; flex:none; }
+.info-card h4{ font-size:.98rem; margin-bottom:4px; }
+.info-card p{ font-size:.84rem; color:var(--ink-soft); line-height:1.5; }
+.info-date{ font-family:var(--font-mono); font-size:.68rem; color:var(--ink-faint); margin-top:6px; display:block; }
+.info-hidden{ display:none; }
+.info-hidden.show{ display:flex; }
+
+/* ============================================================
+   CHALLENGE
+   ============================================================ */
+.challenge-panel{
+  background:linear-gradient(135deg, var(--ink) 0%, #2a2f57 100%); border-radius:28px; padding:48px 40px;
+  color:#fff; position:relative; overflow:hidden;
+}
+.challenge-panel::before{
+  content:''; position:absolute; inset:0; opacity:.08;
+  background-image: radial-gradient(circle, #fff 1.5px, transparent 1.5px); background-size:26px 26px;
+}
+.challenge-inner{ position:relative; z-index:1; display:grid; grid-template-columns:1fr 1fr; gap:40px; align-items:center; }
+.challenge-panel .eyebrow{ color:var(--amber); }
+.challenge-panel .eyebrow::before{ background:var(--amber); }
+.challenge-panel h2{ color:#fff; margin-top:10px; font-size:clamp(1.6rem,3vw,2.2rem); }
+.challenge-panel p{ color:#c7cae8; margin-top:12px; line-height:1.6; }
+.challenge-cats{ display:flex; flex-wrap:wrap; gap:8px; margin-top:20px; }
+.challenge-cats span{ font-size:.78rem; font-family:var(--font-mono); border:1px solid rgba(255,255,255,.25); padding:6px 12px; border-radius:100px; color:#e4e6fa; }
+.quiz-card{ background:#fff; border-radius:var(--radius-lg); padding:26px; color:var(--ink); min-height:260px; display:flex; flex-direction:column; }
+.quiz-cat{ font-family:var(--font-mono); font-size:.7rem; text-transform:uppercase; letter-spacing:.06em; color:var(--amber); font-weight:700; }
+.quiz-question{ font-size:1.15rem; font-weight:600; margin-top:10px; font-family:var(--font-display); flex:1; }
+.quiz-input-row{ display:flex; gap:10px; margin-top:16px; }
+.quiz-input-row input{ flex:1; border:1.5px solid var(--line); border-radius:var(--radius-sm); padding:12px 14px; font-size:.95rem; }
+.quiz-input-row input:focus{ border-color:var(--amber); outline:none; }
+.quiz-feedback{ margin-top:12px; font-size:.88rem; font-weight:600; min-height:20px; }
+.quiz-feedback.ok{ color:var(--mint); }
+.quiz-feedback.bad{ color:var(--coral); }
+.challenge-panel .btn-light{ margin-top:22px; }
+@media (max-width:860px){ .challenge-inner{ grid-template-columns:1fr; } .challenge-panel{ padding:34px 22px; } }
+
+/* ============================================================
+   PROGRESS DASHBOARD
+   ============================================================ */
+.progress-panel{
+  background:var(--paper-card); border:1px solid var(--line); border-radius:var(--radius-lg);
+  padding:34px; box-shadow:var(--shadow-sm);
+}
+.progress-head{ display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; margin-bottom:26px; }
+.progress-head h3{ font-size:1.2rem; }
+.progress-note{ font-size:.78rem; color:var(--ink-faint); font-family:var(--font-mono); }
+.progress-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:24px; }
+.progress-item b{ font-family:var(--font-mono); font-size:1.6rem; }
+.progress-item .p-label{ font-size:.84rem; color:var(--ink-soft); margin-top:2px; display:block; }
+.p-bar{ height:10px; border-radius:100px; background:var(--paper); margin-top:12px; overflow:hidden; }
+.p-bar-fill{ height:100%; border-radius:100px; transition:width .5s ease; background:var(--primary); }
+.progress-item.c-mint .p-bar-fill{ background:var(--mint); }
+.progress-item.c-coral .p-bar-fill{ background:var(--coral); }
+.progress-item.c-amber .p-bar-fill{ background:var(--amber); }
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+footer{ background:var(--ink); color:#c7cae8; padding:56px 0 26px; margin-top:40px; }
+.footer-grid{ display:grid; grid-template-columns:1.4fr repeat(3,1fr); gap:32px; }
+.footer-brand{ display:flex; align-items:center; gap:10px; color:#fff; font-family:var(--font-display); font-weight:700; font-size:1.2rem; }
+footer p.tagline{ margin-top:12px; font-size:.88rem; color:#9a9dc4; }
+footer h5{ font-family:var(--font-mono); font-size:.72rem; text-transform:uppercase; letter-spacing:.08em; color:#9a9dc4; margin-bottom:14px; }
+footer ul li{ margin-bottom:10px; }
+footer ul li a{ font-size:.9rem; color:#dcdef4; }
+footer ul li a:hover{ color:var(--amber); }
+.footer-bottom{ border-top:1px solid rgba(255,255,255,.1); margin-top:40px; padding-top:22px; font-size:.8rem; color:#8082ab; display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px; }
+@media (max-width:760px){ .footer-grid{ grid-template-columns:1fr 1fr; } }
+
+/* ============================================================
+   MODAL
+   ============================================================ */
+.modal-overlay{
+  position:fixed; inset:0; background:rgba(24,28,54,.55); backdrop-filter:blur(3px); z-index:1000;
+  display:none; align-items:center; justify-content:center; padding:20px;
+}
+.modal-overlay.open{ display:flex; }
+.modal-box{
+  background:#fff; border-radius:24px; max-width:640px; width:100%; max-height:85vh; overflow-y:auto;
+  padding:34px; position:relative; box-shadow:var(--shadow-lg);
+}
+.modal-close{
+  position:absolute; top:18px; right:18px; width:36px; height:36px; border-radius:50%; border:1px solid var(--line);
+  background:#fff; display:flex; align-items:center; justify-content:center; font-size:1.1rem; color:var(--ink-soft);
+}
+.modal-close:hover{ background:var(--paper); }
+.modal-tag{ font-family:var(--font-mono); font-size:.72rem; text-transform:uppercase; letter-spacing:.08em; padding:6px 12px; border-radius:100px; width:fit-content; margin-bottom:14px; }
+.modal-box h3{ font-size:1.5rem; margin-bottom:10px; }
+.modal-box p.mdesc{ color:var(--ink-soft); font-size:.95rem; line-height:1.6; margin-bottom:22px; }
+.modal-topics{ display:flex; flex-direction:column; gap:10px; }
+.modal-topic{
+  display:flex; align-items:center; justify-content:space-between; gap:14px; padding:14px 16px;
+  background:var(--paper); border-radius:14px; border:1px solid var(--line);
+}
+.modal-topic-name{ font-weight:600; font-size:.94rem; }
+.modal-topic-links{ display:flex; gap:6px; flex-wrap:wrap; }
+.modal-topic-links a{
+  font-family:var(--font-mono); font-size:.68rem; padding:5px 9px; border-radius:8px; background:#fff;
+  border:1px solid var(--line); color:var(--ink-soft); font-weight:700;
+}
+.modal-topic-links a:hover{ border-color:var(--primary); color:var(--primary); }
+
+/* generic utility */
+.visually-hidden{ position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; }
+</style>
+</head>
+<body>
+
+<!-- ================= HEADER ================= -->
+<header>
+  <div class="nav-wrap">
+    <a href="#home" class="brand">
+      <span class="brand-mark">
+        <svg viewBox="0 0 38 38" fill="none"><path d="M9 27 L15 13 L20 22 L24 11 L29 27" stroke="#F0A020" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </span>
+      MATHSPACE
+    </a>
+    <nav class="main-nav" id="mainNav">
+      <a href="#home" class="active">HOME</a>
+      <a href="#kelas-vii">KELAS VII</a>
+      <a href="#kelas-viii">KELAS VIII</a>
+      <a href="#kelas-ix">KELAS IX</a>
+      <a href="#media">MEDIA PEMBELAJARAN</a>
+      <a href="#dialog">DIALOG &amp; DISKUSI</a>
+      <a href="#info">INFO PENTING</a>
+    </nav>
+    <div class="nav-actions">
+      <div class="search-box">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+        <input type="text" id="searchInput" placeholder="Cari materi, video, LKPD, soal..." autocomplete="off">
+        <div id="searchResults"></div>
+      </div>
+      <a href="#kelas-vii" class="btn btn-primary btn-sm">Mulai Belajar</a>
+      <button class="hamburger" id="hamburgerBtn" aria-label="Buka menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- ================= HERO ================= -->
+<section class="hero" id="home">
+  <div class="container hero-grid">
+    <div>
+      <span class="eyebrow">Ruang Belajar Matematika SMP</span>
+      <h1>Selamat Datang di Dunia <span class="accent">Matematika!</span></h1>
+      <p class="lead">Temukan konsep, latihan, media pembelajaran, dan tantangan Matematika dalam satu ruang belajar interaktif — dirancang untuk siswa Kelas VII, VIII, dan IX.</p>
+      <div class="hero-actions">
+        <a href="#kelas-vii" class="btn btn-primary">Mulai Belajar</a>
+        <a href="#media" class="btn btn-ghost">Jelajahi Media</a>
+      </div>
+      <div class="hero-stats">
+        <div class="hero-stat"><b>3</b><span>Jenjang kelas</span></div>
+        <div class="hero-stat"><b>18+</b><span>Topik materi</span></div>
+        <div class="hero-stat"><b>5</b><span>Jenis media belajar</span></div>
+      </div>
+    </div>
+    <div class="hero-visual" aria-hidden="true">
+      <svg viewBox="0 0 400 400">
+        <!-- coordinate axes -->
+        <line x1="40" y1="340" x2="380" y2="340" stroke="#D8DCEE" stroke-width="2"/>
+        <line x1="60" y1="360" x2="60" y2="30" stroke="#D8DCEE" stroke-width="2"/>
+        <!-- parabola curve -->
+        <path d="M70 330 C 140 90, 260 90, 360 300" fill="none" stroke="#3B5BFC" stroke-width="4" stroke-linecap="round"/>
+        <!-- plotted points -->
+        <circle cx="130" cy="180" r="6" fill="#0FAF9B"/>
+        <circle cx="215" cy="102" r="6" fill="#F0A020"/>
+        <circle cx="305" cy="196" r="6" fill="#FF6B57"/>
+        <circle cx="70" cy="330" r="5" fill="#8657E8"/>
+      </svg>
+      <span class="float-sym f1" style="top:6%; left:8%; font-size:2.6rem;">π</span>
+      <span class="float-sym f2" style="top:14%; right:6%; font-size:2.1rem;">∑</span>
+      <span class="float-sym f3" style="bottom:20%; left:4%; font-size:2.3rem;">√x</span>
+      <span class="float-sym f4" style="bottom:6%; right:14%; font-size:2rem;">÷</span>
+      <span class="float-sym f5" style="top:44%; right:0%; font-size:1.8rem;">∞</span>
+    </div>
+  </div>
+</section>
+
+<div class="axis-divider">
+  <svg width="16" height="16" viewBox="0 0 16 16"><circle cx="8" cy="8" r="4" fill="none" stroke="#8A8FB3" stroke-width="1.5"/></svg>
+  <span>Pilih jenjang untuk mulai</span>
+  <div class="line"></div>
+</div>
+
+<!-- ================= PILIHAN KELAS ================= -->
+<section id="kelas-vii-anchor">
+  <div class="container grade-plot">
+    <div class="section-head">
+      <span class="eyebrow">Pilihan Jenjang</span>
+      <h2>Belajar sesuai tingkatmu</h2>
+      <p>Setiap jenjang dirancang berjenjang — makin tinggi kelas, makin dalam dan menantang konsepnya.</p>
+    </div>
+    <div class="grade-axis-label">
+      <svg width="60" height="14" viewBox="0 0 60 14"><line x1="0" y1="12" x2="55" y2="2" stroke="#8A8FB3" stroke-width="1.5"/><path d="M50 1 L56 2 L52 6" fill="none" stroke="#8A8FB3" stroke-width="1.5"/></svg>
+      Tingkat kesulitan meningkat →
+    </div>
+    <div class="grade-cards">
+
+      <article class="grade-card c-mint" id="kelas-vii">
+        <span class="grade-tag">KELAS VII</span>
+        <h3>Fondasi Matematika</h3>
+        <p class="desc">Bangun fondasi Matematika melalui konsep dasar dan permasalahan kehidupan sehari-hari.</p>
+        <div class="grade-topics">
+          <span>Bilangan</span><span>Aljabar</span><span>Persamaan &amp; Pertidaksamaan</span><span>Perbandingan</span><span>Geometri</span><span>Data</span>
+        </div>
+        <button class="btn btn-primary btn-block" onclick="openGradeModal('vii')">Belajar Kelas VII</button>
+      </article>
+
+      <article class="grade-card c-coral" id="kelas-viii">
+        <span class="grade-tag">KELAS VIII</span>
+        <h3>Berpikir Logis &amp; Analitis</h3>
+        <p class="desc">Perkuat kemampuan berpikir logis, analitis, dan pemecahan masalah.</p>
+        <div class="grade-topics">
+          <span>Pola Bilangan</span><span>SPLDV</span><span>Relasi &amp; Fungsi</span><span>Teorema Pythagoras</span><span>Lingkaran</span><span>Bangun Ruang</span><span>Statistika</span>
+        </div>
+        <button class="btn btn-primary btn-block" onclick="openGradeModal('viii')">Belajar Kelas VIII</button>
+      </article>
+
+      <article class="grade-card c-amber" id="kelas-ix">
+        <span class="grade-tag">KELAS IX</span>
+        <h3>Siap Hadapi Tantangan</h3>
+        <p class="desc">Persiapkan kemampuan Matematika untuk menghadapi berbagai tantangan dan asesmen.</p>
+        <div class="grade-topics">
+          <span>Bilangan Berpangkat</span><span>Bentuk Akar</span><span>Persamaan Kuadrat</span><span>Kesebangunan</span><span>Bangun Ruang</span><span>Transformasi</span><span>Statistika &amp; Peluang</span>
+        </div>
+        <button class="btn btn-primary btn-block" onclick="openGradeModal('ix')">Belajar Kelas IX</button>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<div class="axis-divider">
+  <svg width="16" height="16" viewBox="0 0 16 16"><circle cx="8" cy="8" r="4" fill="none" stroke="#8A8FB3" stroke-width="1.5"/></svg>
+  <span>Beragam cara belajar</span>
+  <div class="line"></div>
+</div>
+
+<!-- ================= MEDIA PEMBELAJARAN ================= -->
+<section id="media" class="section-alt">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">Media Pembelajaran</span>
+      <h2>Belajar dengan Cara yang Berbeda</h2>
+      <p>Pilih media yang paling cocok dengan gaya belajarmu — dari lembar kerja, video, komik, simulasi, hingga latihan soal.</p>
+    </div>
+    <div class="media-grid" id="mediaGrid"></div>
+  </div>
+</section>
+
+<div class="axis-divider">
+  <svg width="16" height="16" viewBox="0 0 16 16"><circle cx="8" cy="8" r="4" fill="none" stroke="#8A8FB3" stroke-width="1.5"/></svg>
+  <span>Matematika di sekitar kita</span>
+  <div class="line"></div>
+</div>
+
+<!-- ================= MATH IN LIFE ================= -->
+<section id="math-in-life">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">Math in Life</span>
+      <h2>Matematika Ada di Sekitar Kita</h2>
+      <p>Matematika bukan hanya materi di kelas — ia dipakai setiap hari, di mana pun kamu berada.</p>
+    </div>
+    <div class="life-grid" id="lifeGrid"></div>
+  </div>
+</section>
+
+<!-- ================= MATH CHALLENGE ================= -->
+<section id="challenge">
+  <div class="container">
+    <div class="challenge-panel">
+      <div class="challenge-inner">
+        <div>
+          <span class="eyebrow">Math Challenge</span>
+          <h2>🔥 Uji Kemampuanmu</h2>
+          <p>Tebak konsep, pecahkan masalah, cari pola, hingga soal HOTS — asah kemampuan Matematikamu lewat tantangan singkat.</p>
+          <div class="challenge-cats">
+            <span>Tebak Konsep</span><span>Pecahkan Masalah</span><span>Cari Pola</span><span>SPLDV</span><span>Logika</span><span>HOTS</span>
+          </div>
+          <button class="btn btn-light" id="startChallengeBtn">Mulai Tantangan</button>
+        </div>
+        <div class="quiz-card">
+          <div class="quiz-cat" id="quizCat">SIAP-SIAP</div>
+          <div class="quiz-question" id="quizQuestion">Tekan "Mulai Tantangan" untuk mendapatkan soal pertamamu!</div>
+          <div class="quiz-input-row">
+            <input type="text" id="quizInput" placeholder="Jawabanmu..." disabled>
+            <button class="btn btn-primary btn-sm" id="quizCheckBtn" disabled>Cek</button>
+          </div>
+          <div class="quiz-feedback" id="quizFeedback"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="axis-divider">
+  <svg width="16" height="16" viewBox="0 0 16 16"><circle cx="8" cy="8" r="4" fill="none" stroke="#8A8FB3" stroke-width="1.5"/></svg>
+  <span>Diskusi &amp; refleksi</span>
+  <div class="line"></div>
+</div>
+
+<!-- ================= DIALOG & DISKUSI ================= -->
+<section id="dialog" class="section-alt">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">Dialog &amp; Diskusi</span>
+      <h2>Matematika Bukan Sekadar Menghitung</h2>
+      <p>Ajukan pertanyaan, sampaikan pendapat, bandingkan strategi, dan jelaskan alasan dari jawabanmu bersama teman sekelas.</p>
+    </div>
+    <div class="dialog-wrap">
+      <div>
+        <div class="prompt-card" onclick="usePrompt(this)">Apakah satu masalah Matematika selalu hanya memiliki satu cara penyelesaian?</div>
+        <div class="prompt-card" onclick="usePrompt(this)">Mengapa metode tertentu lebih efektif untuk menyelesaikan masalah tertentu?</div>
+        <div class="prompt-card" onclick="usePrompt(this)">Bagaimana caramu menjelaskan jawabanmu kepada teman yang belum paham?</div>
+        <a href="#" class="btn btn-ghost btn-sm" style="margin-top:6px;">Ikuti Diskusi</a>
+      </div>
+      <div class="dialog-box">
+        <label for="dialogInput" style="font-weight:600; font-size:.92rem;">Mulai Dialog</label>
+        <div style="margin-top:10px;">
+          <textarea id="dialogInput" placeholder="Tulis pertanyaan, pendapat, atau strategi penyelesaianmu di sini..."></textarea>
+        </div>
+        <div class="dialog-actions">
+          <button class="btn btn-primary" onclick="postDialog()">Kirim ke Diskusi</button>
+        </div>
+        <div id="dialogFeed"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= INFO PENTING ================= -->
+<section id="info">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">📢 Info Penting</span>
+      <h2>Jangan Sampai Ketinggalan</h2>
+      <p>Jadwal, materi terbaru, tugas, asesmen, dan pengumuman seputar kelas Matematika.</p>
+    </div>
+    <div class="info-grid" id="infoGrid"></div>
+    <div style="text-align:center; margin-top:30px;">
+      <button class="btn btn-ghost" id="showAllInfoBtn">Lihat Semua Informasi</button>
+    </div>
+  </div>
+</section>
+
+<div class="axis-divider">
+  <svg width="16" height="16" viewBox="0 0 16 16"><circle cx="8" cy="8" r="4" fill="none" stroke="#8A8FB3" stroke-width="1.5"/></svg>
+  <span>Pantau perkembanganmu</span>
+  <div class="line"></div>
+</div>
+
+<!-- ================= PROGRESS BELAJAR ================= -->
+<section id="progress" class="section-alt">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">Dashboard Siswa</span>
+      <h2>Progress Belajar Saya</h2>
+      <p>Pantau materi yang sudah dipelajari, latihan yang dikerjakan, dan tantangan yang berhasil diselesaikan.</p>
+    </div>
+    <div class="progress-panel">
+      <div class="progress-head">
+        <h3>Ringkasan Belajarmu Hari Ini</h3>
+        <span class="progress-note">*data sesi ini — akan tersimpan penuh saat fitur akun aktif</span>
+      </div>
+      <div class="progress-grid">
+        <div class="progress-item">
+          <b id="pMateri">0/6</b>
+          <span class="p-label">Materi telah dipelajari</span>
+          <div class="p-bar"><div class="p-bar-fill" id="pMateriBar" style="width:0%"></div></div>
+        </div>
+        <div class="progress-item c-mint">
+          <b id="pLatihan">0</b>
+          <span class="p-label">Latihan telah dikerjakan</span>
+          <div class="p-bar"><div class="p-bar-fill" id="pLatihanBar" style="width:0%"></div></div>
+        </div>
+        <div class="progress-item c-coral">
+          <b id="pSkor">0%</b>
+          <span class="p-label">Skor rata-rata latihan</span>
+          <div class="p-bar"><div class="p-bar-fill" id="pSkorBar" style="width:0%"></div></div>
+        </div>
+        <div class="progress-item c-amber">
+          <b id="pTantangan">0</b>
+          <span class="p-label">Tantangan diselesaikan</span>
+          <div class="p-bar"><div class="p-bar-fill" id="pTantanganBar" style="width:0%"></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FOOTER ================= -->
+<footer>
+  <div class="container footer-grid">
+    <div>
+      <div class="footer-brand">
+        <span class="brand-mark" style="background:#fff;">
+          <svg viewBox="0 0 38 38" fill="none"><path d="M9 27 L15 13 L20 22 L24 11 L29 27" stroke="#181C36" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+        MATHSPACE
+      </div>
+      <p class="tagline">Ruang Belajar Matematika<br>“Belajar • Berpikir • Berdiskusi • Berkarya”</p>
+    </div>
+    <div>
+      <h5>Jenjang</h5>
+      <ul>
+        <li><a href="#kelas-vii">Kelas VII</a></li>
+        <li><a href="#kelas-viii">Kelas VIII</a></li>
+        <li><a href="#kelas-ix">Kelas IX</a></li>
+      </ul>
+    </div>
+    <div>
+      <h5>Belajar</h5>
+      <ul>
+        <li><a href="#media">Media Pembelajaran</a></li>
+        <li><a href="#dialog">Dialog &amp; Diskusi</a></li>
+        <li><a href="#challenge">Math Challenge</a></li>
+      </ul>
+    </div>
+    <div>
+      <h5>Lainnya</h5>
+      <ul>
+        <li><a href="#info">Info Penting</a></li>
+        <li><a href="#progress">Progress Belajar</a></li>
+        <li><a href="#home">Kembali ke Atas</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="container footer-bottom">
+    <span>© 2026 MATHSPACE – Media Pembelajaran Matematika SMP</span>
+    <span>Dibuat untuk siswa Kelas VII, VIII &amp; IX</span>
+  </div>
+</footer>
+
+<!-- ================= MODAL ================= -->
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal-box" id="modalBox">
+    <button class="modal-close" onclick="closeModal()" aria-label="Tutup">✕</button>
+    <div id="modalContent"></div>
+  </div>
+</div>
+
+<script>
+/* ============================================================
+   DATA LAYER — pisahkan data materi dari tampilan
+   ============================================================ */
+const GRADE_DATA = {
+  vii: {
+    label: "Kelas VII", color:"mint", accentHex:"#0FAF9B",
+    desc: "Bangun fondasi Matematika melalui konsep dasar dan permasalahan kehidupan sehari-hari.",
+    topics: ["Bilangan","Aljabar","Persamaan dan Pertidaksamaan","Perbandingan","Geometri","Data"]
+  },
+  viii: {
+    label: "Kelas VIII", color:"coral", accentHex:"#FF6B57",
+    desc: "Perkuat kemampuan berpikir logis, analitis, dan pemecahan masalah.",
+    topics: ["Pola Bilangan","SPLDV","Relasi dan Fungsi","Teorema Pythagoras","Lingkaran","Bangun Ruang","Statistika"]
+  },
+  ix: {
+    label: "Kelas IX", color:"amber", accentHex:"#F0A020",
+    desc: "Persiapkan kemampuan Matematika untuk menghadapi berbagai tantangan dan asesmen.",
+    topics: ["Bilangan Berpangkat","Bentuk Akar","Persamaan Kuadrat","Kesebangunan","Bangun Ruang","Transformasi","Statistika dan Peluang"]
+  }
+};
+
+const MEDIA_DATA = [
+  { icon:"📖", title:"LKPD", desc:"LKPD interaktif untuk memahami konsep melalui aktivitas dan pemecahan masalah.", tint:"var(--primary-tint)" },
+  { icon:"🎬", title:"Video", desc:"Video pembelajaran singkat, jelas, dan kontekstual.", tint:"var(--coral-tint)" },
+  { icon:"📚", title:"Komik", desc:"Komik Matematika untuk memahami konsep melalui cerita dan kehidupan sehari-hari.", tint:"var(--amber-tint)" },
+  { icon:"🧪", title:"Simulasi", desc:"Simulasi interaktif untuk mengeksplorasi konsep Matematika.", tint:"var(--mint-tint)" },
+  { icon:"🎯", title:"Latihan Soal", desc:"Latihan soal bertingkat dari pemahaman konsep hingga HOTS.", tint:"var(--violet-tint)" }
+];
+
+const LIFE_DATA = [
+  { emoji:"🍜", title:"Matematika di Kantin", txt:"Menghitung uang kembalian & harga total jajanan.", grad:"#3B5BFC,#8657E8" },
+  { emoji:"🛒", title:"Matematika di Pasar", txt:"Tawar-menawar, diskon, dan perbandingan harga.", grad:"#0FAF9B,#3B5BFC" },
+  { emoji:"🚌", title:"Matematika dalam Perjalanan", txt:"Kecepatan, jarak, dan waktu tempuh.", grad:"#F0A020,#FF6B57" },
+  { emoji:"⚽", title:"Matematika dalam Olahraga", txt:"Statistik skor, peluang menang, dan sudut tendangan.", grad:"#FF6B57,#8657E8" },
+  { emoji:"💻", title:"Matematika dalam Teknologi", txt:"Kode, algoritma, dan data di balik aplikasi favoritmu.", grad:"#8657E8,#3B5BFC" },
+  { emoji:"🧱", title:"Matematika dalam Pekerjaan", txt:"Perhitungan bangunan, keuangan, dan desain.", grad:"#0FAF9B,#F0A020" }
+];
+
+const INFO_DATA = [
+  { cat:"Jadwal", color:"var(--primary)", title:"Jadwal Pembelajaran Minggu Ini", desc:"Kelas VII: Senin & Rabu. Kelas VIII: Selasa & Kamis. Kelas IX: Rabu & Jumat.", date:"12 Agu 2026" },
+  { cat:"Materi Terbaru", color:"var(--mint)", title:"SPLDV — Metode Grafik", desc:"Materi dan LKPD metode grafik SPLDV sudah tersedia di Kelas VIII.", date:"10 Agu 2026" },
+  { cat:"Tugas", color:"var(--coral)", title:"Tugas Bilangan Bulat", desc:"Kumpulkan LKPD Pertemuan 3 paling lambat Jumat.", date:"9 Agu 2026" },
+  { cat:"Asesmen", color:"var(--amber)", title:"Asesmen Sumatif Bab 2", desc:"Persiapkan diri untuk asesmen sumatif Kelas IX minggu depan.", date:"14 Agu 2026", hidden:true },
+  { cat:"Pengumuman", color:"var(--violet)", title:"Perubahan Ruang Kelas", desc:"Kelas VII sementara pindah ke Lab Komputer untuk 2 pertemuan.", date:"8 Agu 2026", hidden:true },
+  { cat:"Lomba", color:"var(--primary)", title:"Kompetisi Matematika Antar Kelas", desc:"Pendaftaran tim Math Challenge dibuka hingga akhir bulan.", date:"5 Agu 2026", hidden:true }
+];
+
+const QUIZ_DATA = [
+  { cat:"Tebak Konsep", q:"Berapa hasil dari 3² + 4²?", a:["25"] },
+  { cat:"Pecahkan Masalah", q:"Harga 3 buku sama dengan Rp 45.000. Berapa harga 5 buku?", a:["75000","rp75000","rp 75.000","75.000"] },
+  { cat:"Cari Pola", q:"Lanjutkan pola: 2, 4, 8, 16, ...", a:["32"] },
+  { cat:"Tantangan SPLDV", q:"Jika x + y = 10 dan x − y = 2, berapa nilai x?", a:["6"] },
+  { cat:"Tantangan Logika", q:"Semua kucing punya ekor. Tono punya ekor. Apakah Tono pasti kucing? (ya/tidak)", a:["tidak"] },
+  { cat:"Soal HOTS", q:"Sebuah persegi panjang punya keliling 24 cm dan panjang 8 cm. Berapa luasnya (cm²)?", a:["32"] }
+];
+
+/* combined search index */
+const SEARCH_INDEX = [
+  ...Object.entries(GRADE_DATA).flatMap(([key,g]) => g.topics.map(t => ({ label:t, cat:g.label, target:"#kelas-"+key }))),
+  ...MEDIA_DATA.map(m => ({ label:m.title, cat:"Media Pembelajaran", target:"#media" })),
+  ...INFO_DATA.map(i => ({ label:i.title, cat:i.cat, target:"#info" })),
+  { label:"Dialog & Diskusi", cat:"Halaman", target:"#dialog" },
+  { label:"Math Challenge", cat:"Halaman", target:"#challenge" },
+  { label:"Matematika dalam Kehidupan", cat:"Halaman", target:"#math-in-life" }
+];
+
+/* ============================================================
+   RENDER: MEDIA GRID
+   ============================================================ */
+const mediaGrid = document.getElementById("mediaGrid");
+MEDIA_DATA.forEach(m => {
+  const el = document.createElement("div");
+  el.className = "media-card";
+  el.innerHTML = `
+    <div class="media-icon" style="background:${m.tint};">${m.icon}</div>
+    <h4>${m.title}</h4>
+    <p>${m.desc}</p>
+    <a href="#" class="open" onclick="openMediaModal('${m.title.replace(/'/g,"")}');return false;">Buka Media
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+    </a>`;
+  mediaGrid.appendChild(el);
+});
+
+/* ============================================================
+   RENDER: MATH IN LIFE
+   ============================================================ */
+const lifeGrid = document.getElementById("lifeGrid");
+LIFE_DATA.forEach(l => {
+  const el = document.createElement("div");
+  el.className = "life-card";
+  el.style.background = `linear-gradient(135deg, ${l.grad.split(',')[0]}, ${l.grad.split(',')[1]})`;
+  el.innerHTML = `<span class="life-emoji">${l.emoji}</span><span class="txt">${l.title}</span>`;
+  el.title = l.txt;
+  lifeGrid.appendChild(el);
+});
+
+/* ============================================================
+   RENDER: INFO GRID
+   ============================================================ */
+const infoGrid = document.getElementById("infoGrid");
+INFO_DATA.forEach(i => {
+  const el = document.createElement("div");
+  el.className = "info-card" + (i.hidden ? " info-hidden" : "");
+  el.innerHTML = `
+    <span class="info-dot" style="background:${i.color};"></span>
+    <div>
+      <h4>${i.title}</h4>
+      <p>${i.desc}</p>
+      <span class="info-date">${i.cat} · ${i.date}</span>
+    </div>`;
+  infoGrid.appendChild(el);
+});
+document.getElementById("showAllInfoBtn").addEventListener("click", function(){
+  document.querySelectorAll(".info-hidden").forEach(el => el.classList.add("show"));
+  this.style.display = "none";
+});
+
+/* ============================================================
+   NAV: hamburger + active link on scroll
+   ============================================================ */
+const hamburgerBtn = document.getElementById("hamburgerBtn");
+const mainNav = document.getElementById("mainNav");
+hamburgerBtn.addEventListener("click", () => {
+  const open = mainNav.classList.toggle("open");
+  hamburgerBtn.setAttribute("aria-expanded", open);
+});
+mainNav.querySelectorAll("a").forEach(a => a.addEventListener("click", () => mainNav.classList.remove("open")));
+
+const navLinks = document.querySelectorAll("nav.main-nav a");
+const sectionsForNav = ["home","kelas-vii","kelas-viii","kelas-ix","media","dialog","info"]
+  .map(id => document.getElementById(id)).filter(Boolean);
+const navObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const id = entry.target.id;
+      navLinks.forEach(a => a.classList.toggle("active", a.getAttribute("href") === "#"+id));
+    }
+  });
+}, { rootMargin: "-40% 0px -50% 0px" });
+sectionsForNav.forEach(s => navObserver.observe(s));
+
+/* ============================================================
+   SEARCH
+   ============================================================ */
+const searchInput = document.getElementById("searchInput");
+const searchResults = document.getElementById("searchResults");
+searchInput.addEventListener("input", () => {
+  const q = searchInput.value.trim().toLowerCase();
+  if (!q) { searchResults.classList.remove("show"); return; }
+  const matches = SEARCH_INDEX.filter(item => item.label.toLowerCase().includes(q)).slice(0, 8);
+  searchResults.innerHTML = matches.length
+    ? matches.map(m => `<a href="${m.target}" class="sr-item"><div class="sr-cat">${m.cat}</div>${m.label}</a>`).join("")
+    : `<div class="sr-empty">Tidak ada hasil untuk "${q}"</div>`;
+  searchResults.classList.add("show");
+});
+searchResults.addEventListener("click", (e) => {
+  if (e.target.closest("a")) { searchInput.value=""; searchResults.classList.remove("show"); }
+});
+document.addEventListener("click", (e) => {
+  if (!e.target.closest(".search-box")) searchResults.classList.remove("show");
+});
+
+/* ============================================================
+   MODALS: grade + media
+   ============================================================ */
+const modalOverlay = document.getElementById("modalOverlay");
+const modalContent = document.getElementById("modalContent");
+const tintMap = { mint:"var(--mint-tint)", coral:"var(--coral-tint)", amber:"var(--amber-tint)" };
+
+function openGradeModal(key){
+  const g = GRADE_DATA[key];
+  const topicsHtml = g.topics.map(t => `
+    <div class="modal-topic">
+      <span class="modal-topic-name">${t}</span>
+      <div class="modal-topic-links">
+        <a href="#" onclick="return false;">Materi</a>
+        <a href="#" onclick="return false;">Media</a>
+        <a href="#" onclick="return false;">Latihan</a>
+      </div>
+    </div>`).join("");
+  modalContent.innerHTML = `
+    <span class="modal-tag" style="background:${tintMap[g.color]}; color:${g.accentHex};">${g.label}</span>
+    <h3>${g.label} — Daftar Materi</h3>
+    <p class="mdesc">${g.desc}</p>
+    <div class="modal-topics">${topicsHtml}</div>`;
+  modalOverlay.classList.add("open");
+  markMateriProgress();
+}
+
+function openMediaModal(title){
+  const m = MEDIA_DATA.find(x => x.title === title);
+  modalContent.innerHTML = `
+    <span class="modal-tag" style="background:${m.tint}; color:var(--ink);">${m.icon} ${m.title}</span>
+    <h3>${m.title}</h3>
+    <p class="mdesc">${m.desc}</p>
+    <p class="mdesc">Pilih jenjang untuk melihat koleksi ${m.title.toLowerCase()} yang sesuai:</p>
+    <div class="modal-topics">
+      ${Object.entries(GRADE_DATA).map(([k,g]) => `
+        <div class="modal-topic">
+          <span class="modal-topic-name">${g.label}</span>
+          <div class="modal-topic-links"><a href="#kelas-${k}" onclick="closeModal()">Lihat Materi</a></div>
+        </div>`).join("")}
+    </div>`;
+  modalOverlay.classList.add("open");
+}
+
+function closeModal(){ modalOverlay.classList.remove("open"); }
+modalOverlay.addEventListener("click", (e) => { if (e.target === modalOverlay) closeModal(); });
+document.addEventListener("keydown", (e) => { if (e.key === "Escape") closeModal(); });
+
+/* ============================================================
+   DIALOG & DISKUSI
+   ============================================================ */
+function usePrompt(el){
+  document.getElementById("dialogInput").value = el.textContent.trim();
+  document.getElementById("dialogInput").focus();
+}
+function postDialog(){
+  const input = document.getElementById("dialogInput");
+  const text = input.value.trim();
+  if (!text) { input.focus(); return; }
+  const feed = document.getElementById("dialogFeed");
+  const item = document.createElement("div");
+  item.className = "feed-item";
+  const time = new Date().toLocaleTimeString("id-ID", { hour:"2-digit", minute:"2-digit" });
+  item.innerHTML = `${escapeHtml(text)}<div class="fi-meta">Dikirim ${time} · sesi ini</div>`;
+  feed.prepend(item);
+  input.value = "";
+}
+function escapeHtml(s){ return s.replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+
+/* ============================================================
+   MATH CHALLENGE
+   ============================================================ */
+let currentQuiz = null;
+const quizCat = document.getElementById("quizCat");
+const quizQuestion = document.getElementById("quizQuestion");
+const quizInput = document.getElementById("quizInput");
+const quizCheckBtn = document.getElementById("quizCheckBtn");
+const quizFeedback = document.getElementById("quizFeedback");
+const startChallengeBtn = document.getElementById("startChallengeBtn");
+
+function nextQuiz(){
+  currentQuiz = QUIZ_DATA[Math.floor(Math.random() * QUIZ_DATA.length)];
+  quizCat.textContent = currentQuiz.cat;
+  quizQuestion.textContent = currentQuiz.q;
+  quizInput.value = "";
+  quizInput.disabled = false;
+  quizCheckBtn.disabled = false;
+  quizFeedback.textContent = "";
+  quizFeedback.className = "quiz-feedback";
+  quizInput.focus();
+}
+startChallengeBtn.addEventListener("click", nextQuiz);
+quizCheckBtn.addEventListener("click", checkQuiz);
+quizInput.addEventListener("keydown", (e) => { if (e.key === "Enter") checkQuiz(); });
+
+function checkQuiz(){
+  if (!currentQuiz) return;
+  const val = quizInput.value.trim().toLowerCase().replace(/\s+/g,'');
+  const correct = currentQuiz.a.some(a => a.replace(/\s+/g,'') === val);
+  if (correct){
+    quizFeedback.textContent = "✓ Benar! Kerja bagus.";
+    quizFeedback.className = "quiz-feedback ok";
+    progressState.tantangan += 1;
+    progressState.skorTotal += 100; progressState.skorCount += 1;
+  } else {
+    quizFeedback.textContent = "✗ Belum tepat, coba tantangan berikutnya!";
+    quizFeedback.className = "quiz-feedback bad";
+    progressState.skorTotal += 0; progressState.skorCount += 1;
+  }
+  progressState.latihan += 1;
+  updateProgressUI();
+  setTimeout(nextQuiz, 1400);
+}
+
+/* ============================================================
+   PROGRESS BELAJAR (session-only demo state)
+   ============================================================ */
+const progressState = {
+  materiSeen: new Set(),
+  latihan: 0,
+  skorTotal: 0,
+  skorCount: 0,
+  tantangan: 0
+};
+function markMateriProgress(){
+  // Membuka daftar materi suatu jenjang dihitung sebagai eksplorasi materi (demo)
+  progressState.materiSeen.add(Date.now());
+  updateProgressUI();
+}
+function updateProgressUI(){
+  const materiCount = Math.min(progressState.materiSeen.size, 6);
+  document.getElementById("pMateri").textContent = materiCount + "/6";
+  document.getElementById("pMateriBar").style.width = (materiCount/6*100) + "%";
+
+  document.getElementById("pLatihan").textContent = progressState.latihan;
+  document.getElementById("pLatihanBar").style.width = Math.min(progressState.latihan*10,100) + "%";
+
+  const skor = progressState.skorCount ? Math.round(progressState.skorTotal/progressState.skorCount) : 0;
+  document.getElementById("pSkor").textContent = skor + "%";
+  document.getElementById("pSkorBar").style.width = skor + "%";
+
+  document.getElementById("pTantangan").textContent = progressState.tantangan;
+  document.getElementById("pTantanganBar").style.width = Math.min(progressState.tantangan*10,100) + "%";
+}
+updateProgressUI();
+</script>
+</body>
+</html>
