@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-17T12:20:44.038Z",
+  "updatedAt": "2026-08-17T12:27:47.554Z",
   "adminAuth": {
     "salt": "2pXzZsO6c0QsZN5VJfp33w==",
     "hash": "KFDD/rwQHHIApCEvT6HU5P18jUlqUOwLZR0GbO9nvP8=",
@@ -28,7 +28,12 @@
               "url": "https://phet.colorado.edu/en/simulations/number-line-operations"
             }
           ],
-          "latihan": []
+          "latihan": [
+            {
+              "title": "Operasi Bilangan Bulat",
+              "url": "https://drive.google.com/file/d/12mkefOwzBGtca43Phi3RDk3klPg2ItfX/view?usp=drive_link"
+            }
+          ]
         },
         {
           "name": "Bilangan Rasional",
