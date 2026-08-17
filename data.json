@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "",
+  "updatedAt": "2026-08-17T11:45:16.300Z",
   "adminAuth": {
     "salt": "2pXzZsO6c0QsZN5VJfp33w==",
     "hash": "KFDD/rwQHHIApCEvT6HU5P18jUlqUOwLZR0GbO9nvP8=",
@@ -16,7 +16,12 @@
       "topics": [
         {
           "name": "Bilangan Bulat",
-          "materi": [],
+          "materi": [
+            {
+              "title": "",
+              "url": "https://drive.google.com/file/d/1Grqb_S1yZNQJYhRgD9_mJz7VhU12-1z_/view?usp=drive_link"
+            }
+          ],
           "media": [],
           "latihan": []
         },
