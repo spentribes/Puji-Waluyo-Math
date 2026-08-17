@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-17T11:46:48.050Z",
+  "updatedAt": "2026-08-17T11:48:14.063Z",
   "adminAuth": {
     "salt": "2pXzZsO6c0QsZN5VJfp33w==",
     "hash": "KFDD/rwQHHIApCEvT6HU5P18jUlqUOwLZR0GbO9nvP8=",
@@ -27,13 +27,23 @@
         },
         {
           "name": "Bilangan Rasional",
-          "materi": [],
+          "materi": [
+            {
+              "title": "Bilangan rasional adalah bilangan yang dapat dituliskan dalam bentuk pecahan, desimal, maupun persen. Dalam materi ini, siswa belajar mengenal, menuliskan, membandingkan, menghitung, membulatkan, dan mengestimasi bilangan rasional melalui berbagai masalah yang dekat dengan kehidupan sehari-hari, seperti uang, berat, jarak, dan ukuran. Pembelajaran dibuat interaktif agar siswa tidak hanya mampu menghitung, tetapi juga memahami manfaat bilangan rasional dalam kehidupan nyata.",
+              "url": "https://drive.google.com/file/d/1fJmPAfgfJH76ZLctNc1QDDnoztjdIXuY/view?usp=drive_link"
+            }
+          ],
           "media": [],
           "latihan": []
         },
         {
           "name": "Rasio",
-          "materi": [],
+          "materi": [
+            {
+              "title": "Materi Rasio membantu siswa memahami hubungan antara dua besaran melalui perbandingan yang sederhana dan bermakna. Dalam pembelajaran mendalam, siswa belajar menentukan, menyederhanakan, dan menggunakan rasio untuk menyelesaikan masalah kehidupan sehari-hari, seperti perbandingan jumlah benda, resep makanan, jarak, harga, dan skala. Pembelajaran dilakukan secara kontekstual agar siswa mampu memahami konsep, menerapkan dalam masalah nyata, serta menjelaskan alasan dari penyelesaiannya.",
+              "url": "https://drive.google.com/file/d/1nmzSRC_l5wb5OV0j42aRngXNR7sMJVnh/view?usp=drive_link"
+            }
+          ],
           "media": [],
           "latihan": []
         },
