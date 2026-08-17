@@ -1,0 +1,360 @@
+{
+  "version": 1,
+  "updatedAt": "",
+  "adminAuth": {
+    "salt": "2pXzZsO6c0QsZN5VJfp33w==",
+    "hash": "KFDD/rwQHHIApCEvT6HU5P18jUlqUOwLZR0GbO9nvP8=",
+    "iterations": 200000
+  },
+  "grade": {
+    "vii": {
+      "label": "Kelas VII",
+      "color": "mint",
+      "accentHex": "#0FAF9B",
+      "heading": "Fondasi Matematika",
+      "desc": "Bangun fondasi Matematika melalui konsep dasar dan permasalahan kehidupan sehari-hari.",
+      "topics": [
+        {
+          "name": "Bilangan Bulat",
+          "materi": [],
+          "media": [],
+          "latihan": []
+        },
+        {
+          "name": "Bilangan Rasional",
+          "materi": [],
+          "media": [],
+          "latihan": []
+        },
+        {
+          "name": "Rasio",
+          "materi": [],
+          "media": [],
+          "latihan": []
+        },
+        {
+          "name": "Pola Bilangan",
+          "materi": [],
+          "media": [],
+          "latihan": []
+        },
+        {
+          "name": "Aljabar",
+          "materi": [],
+          "media": [],
+          "latihan": []
+        },
+        {
+          "name": "Sudut",
+          "materi": [],
+          "media": [],
+          "latihan": []
+        },
+        {
+          "name": "Kesebangunan",
+          "materi": [],
+          "media": [],
+          "latihan": []
+        },
+        {
+          "name": "Data dan Diagram",
+          "materi": [],
+          "media": [],
+          "latihan": []
+        }
+      ]
+    },
+    "viii": {
+      "label": "Kelas VIII",
+      "color": "coral",
+      "accentHex": "#FF6B57",
+      "heading": "Berpikir Logis & Analitis",
+      "desc": "Perkuat kemampuan berpikir logis, analitis, dan pemecahan masalah.",
+      "topics": [
+        {
+          "name": "Bilangan Berpangkat",
+          "materi": [],
+          "media": [],
+          "latihan": []
+        },
+        {
+          "name": "Bilangan Bentuk Akar",
+          "materi": [],
+          "media": [],
+          "latihan": []
+        },
+        {
+          "name": "Notasi Ilmiah",
+          "materi": [],
+          "media": [],
+          "latihan": []
+        },
+        {
+          "name": "PLSV — Persamaan Linear Satu Variabel",
+          "materi": [],
+          "media": [],
+          "latihan": []
+        },
+        {
+          "name": "PtLSV — Pertidaksamaan Linear Satu Variabel",
+          "materi": [],
+          "media": [],
+          "latihan": []
+        },
+        {
+          "name": "Teorema Pythagoras",
+          "materi": [],
+          "media": [],
+          "latihan": []
+        },
+        {
+          "name": "Relasi dan Fungsi",
+          "materi": [],
+          "media": [],
+          "latihan": []
+        },
+        {
+          "name": "PGL — Persamaan Garis Lurus",
+          "materi": [],
+          "media": [],
+          "latihan": []
+        },
+        {
+          "name": "Statistika",
+          "materi": [],
+          "media": [],
+          "latihan": []
+        }
+      ]
+    },
+    "ix": {
+      "label": "Kelas IX",
+      "color": "amber",
+      "accentHex": "#F0A020",
+      "heading": "Siap Hadapi Tantangan",
+      "desc": "Persiapkan kemampuan Matematika untuk menghadapi berbagai tantangan dan asesmen.",
+      "topics": [
+        {
+          "name": "SPLDV",
+          "materi": [],
+          "media": [],
+          "latihan": []
+        },
+        {
+          "name": "Lingkaran",
+          "materi": [],
+          "media": [],
+          "latihan": []
+        },
+        {
+          "name": "Bangun Ruang",
+          "materi": [],
+          "media": [],
+          "latihan": []
+        },
+        {
+          "name": "Kekongruenan",
+          "materi": [],
+          "media": [],
+          "latihan": []
+        },
+        {
+          "name": "Transformasi",
+          "materi": [],
+          "media": [],
+          "latihan": []
+        },
+        {
+          "name": "Peluang",
+          "materi": [],
+          "media": [],
+          "latihan": []
+        }
+      ]
+    }
+  },
+  "media": [
+    {
+      "icon": "📖",
+      "title": "LKPD",
+      "desc": "LKPD interaktif untuk memahami konsep melalui aktivitas dan pemecahan masalah.",
+      "tint": "var(--primary-tint)",
+      "url": ""
+    },
+    {
+      "icon": "🎬",
+      "title": "Video",
+      "desc": "Video pembelajaran singkat, jelas, dan kontekstual.",
+      "tint": "var(--coral-tint)",
+      "url": ""
+    },
+    {
+      "icon": "📚",
+      "title": "Komik",
+      "desc": "Komik Matematika untuk memahami konsep melalui cerita dan kehidupan sehari-hari.",
+      "tint": "var(--amber-tint)",
+      "url": ""
+    },
+    {
+      "icon": "🧪",
+      "title": "Simulasi",
+      "desc": "Simulasi interaktif untuk mengeksplorasi konsep Matematika.",
+      "tint": "var(--mint-tint)",
+      "url": ""
+    },
+    {
+      "icon": "🎯",
+      "title": "Latihan Soal",
+      "desc": "Latihan soal bertingkat dari pemahaman konsep hingga HOTS.",
+      "tint": "var(--violet-tint)",
+      "url": ""
+    }
+  ],
+  "life": [
+    {
+      "emoji": "🍜",
+      "title": "Matematika di Kantin",
+      "txt": "Menghitung uang kembalian & harga total jajanan.",
+      "grad": "#3B5BFC,#8657E8",
+      "url": ""
+    },
+    {
+      "emoji": "🛒",
+      "title": "Matematika di Pasar",
+      "txt": "Tawar-menawar, diskon, dan perbandingan harga.",
+      "grad": "#0FAF9B,#3B5BFC",
+      "url": ""
+    },
+    {
+      "emoji": "🚌",
+      "title": "Matematika dalam Perjalanan",
+      "txt": "Kecepatan, jarak, dan waktu tempuh.",
+      "grad": "#F0A020,#FF6B57",
+      "url": ""
+    },
+    {
+      "emoji": "⚽",
+      "title": "Matematika dalam Olahraga",
+      "txt": "Statistik skor, peluang menang, dan sudut tendangan.",
+      "grad": "#FF6B57,#8657E8",
+      "url": ""
+    },
+    {
+      "emoji": "💻",
+      "title": "Matematika dalam Teknologi",
+      "txt": "Kode, algoritma, dan data di balik aplikasi favoritmu.",
+      "grad": "#8657E8,#3B5BFC",
+      "url": ""
+    },
+    {
+      "emoji": "🧱",
+      "title": "Matematika dalam Pekerjaan",
+      "txt": "Perhitungan bangunan, keuangan, dan desain.",
+      "grad": "#0FAF9B,#F0A020",
+      "url": ""
+    }
+  ],
+  "info": [
+    {
+      "cat": "Jadwal",
+      "color": "var(--primary)",
+      "title": "Jadwal Pembelajaran Minggu Ini",
+      "desc": "Kelas VII: Senin & Rabu. Kelas VIII: Selasa & Kamis. Kelas IX: Rabu & Jumat.",
+      "date": "12 Agu 2026",
+      "url": "",
+      "hidden": false
+    },
+    {
+      "cat": "Materi Terbaru",
+      "color": "var(--mint)",
+      "title": "SPLDV — Metode Grafik",
+      "desc": "Materi dan LKPD metode grafik SPLDV sudah tersedia di Kelas VIII.",
+      "date": "10 Agu 2026",
+      "url": "",
+      "hidden": false
+    },
+    {
+      "cat": "Tugas",
+      "color": "var(--coral)",
+      "title": "Tugas Bilangan Bulat",
+      "desc": "Kumpulkan LKPD Pertemuan 3 paling lambat Jumat.",
+      "date": "9 Agu 2026",
+      "url": "",
+      "hidden": false
+    },
+    {
+      "cat": "Asesmen",
+      "color": "var(--amber)",
+      "title": "Asesmen Sumatif Bab 2",
+      "desc": "Persiapkan diri untuk asesmen sumatif Kelas IX minggu depan.",
+      "date": "14 Agu 2026",
+      "url": "",
+      "hidden": true
+    },
+    {
+      "cat": "Pengumuman",
+      "color": "var(--violet)",
+      "title": "Perubahan Ruang Kelas",
+      "desc": "Kelas VII sementara pindah ke Lab Komputer untuk 2 pertemuan.",
+      "date": "8 Agu 2026",
+      "url": "",
+      "hidden": true
+    },
+    {
+      "cat": "Lomba",
+      "color": "var(--primary)",
+      "title": "Kompetisi Matematika Antar Kelas",
+      "desc": "Pendaftaran tim Math Challenge dibuka hingga akhir bulan.",
+      "date": "5 Agu 2026",
+      "url": "",
+      "hidden": true
+    }
+  ],
+  "quiz": [
+    {
+      "cat": "Tebak Konsep",
+      "q": "Berapa hasil dari 3² + 4²?",
+      "a": [
+        "25"
+      ]
+    },
+    {
+      "cat": "Pecahkan Masalah",
+      "q": "Harga 3 buku sama dengan Rp 45.000. Berapa harga 5 buku?",
+      "a": [
+        "75000",
+        "rp75000",
+        "rp 75.000",
+        "75.000"
+      ]
+    },
+    {
+      "cat": "Cari Pola",
+      "q": "Lanjutkan pola: 2, 4, 8, 16, ...",
+      "a": [
+        "32"
+      ]
+    },
+    {
+      "cat": "Tantangan SPLDV",
+      "q": "Jika x + y = 10 dan x − y = 2, berapa nilai x?",
+      "a": [
+        "6"
+      ]
+    },
+    {
+      "cat": "Tantangan Logika",
+      "q": "Semua kucing punya ekor. Tono punya ekor. Apakah Tono pasti kucing? (ya/tidak)",
+      "a": [
+        "tidak"
+      ]
+    },
+    {
+      "cat": "Soal HOTS",
+      "q": "Sebuah persegi panjang punya keliling 24 cm dan panjang 8 cm. Berapa luasnya (cm²)?",
+      "a": [
+        "32"
+      ]
+    }
+  ]
+}
